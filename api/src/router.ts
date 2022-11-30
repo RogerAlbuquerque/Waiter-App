@@ -1,11 +1,14 @@
 import { Router } from 'express';
+import { listCategories } from './app/useCases/categories/listCategories';
 
 export const router = Router();
 
+
+
+//TUDO ISSO ABAIXO SÃO OS CHAMADOS "CASOS DE USOS"
+
 // List categories
-router.get('/categories', (req,res) => {
-  res.send('OK');
-});
+router.get('/categories', listCategories);
 
 // Create category
 router.post('/categories', (req,res) => {
