@@ -3,11 +3,9 @@ import { Product } from '../../models/Product';
 
 
 
-export async function listProducts(req: Request, res:Response){
+export async function createProducts(req: Request, res:Response){
   try{
-    const products = await Product.find();
-
-    res.json(products);
+    console.log(req.body);
 
   }catch (error){
     console.log(error);
