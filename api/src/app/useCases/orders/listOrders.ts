@@ -10,8 +10,8 @@ export async function listOrders(req: Request, res:Response){
     //Esse sort vai ordenar a resposta de acordo com o que for passado dentro das chaves
       .sort({createdAt:1})             // Esse 1 é como se fosse um "CRESCENT" e 1 é o contrário
 
-    //O populate serve para invés de só mostrar o ID do produto, mostrar todos os dados desse produto em questão
-    //Ja que a tabela "order" tem uma relacionamento com "products"
+    //O populate serve para invés de só mostrar o ID do produto, mostrar todos os dados da tabela "Product" referente a esse produto
+    //Ja que a collection "order" tem uma relacionamento com a collection "Product", isso é possível.
       .populate('products.product');
 
     res.json(orders);

@@ -9,7 +9,8 @@ export async function changeOrderStatus(req: Request, res:Response){
     const {orderId} = req.params;
     const {status} = req.body;
 
-    if(!['WAITING', 'IN_PRODUCTION', 'DONE'].includes(status)){
+    //Basicamente esse if ta vendo se o dado vindo de "status" é igual a um dos elementos desses array, se ele etá incluso dentro dele
+    if(!['WAITING', 'IN_PRODUCTION','DONE'].includes(status)){
       return res.status(400).json({
         error: 'Status shold be one of these : WAITING, IN_PRODUCTION, DONE'
       });
