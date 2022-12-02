@@ -1,17 +1,17 @@
 import path from 'node:path';
 
-import { Router } from 'express';
-import multer from 'multer';
+import { Router                   } from 'express';
+import   multer                     from 'multer';
 
-import { createCategory } from './app/useCases/categories/createCategory';
-import { listCategories } from './app/useCases/categories/listCategories';
-import { createProducts } from './app/useCases/products/createProduct';
-import { listProducts } from './app/useCases/products/listProducts';
+import { createCategory           } from './app/useCases/categories/createCategory'          ;
+import { listCategories           } from './app/useCases/categories/listCategories'          ;
+import { createProducts           } from './app/useCases/products/createProduct'             ;
+import { listProducts             } from './app/useCases/products/listProducts'              ;
 import { listProductsByCategories } from './app/useCases/categories/listProductsByCategories';
-import { listOrders } from './app/useCases/orders/listOrders';
-import { createOrder } from './app/useCases/orders/createOrder';
-import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
-import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import { listOrders               } from './app/useCases/orders/listOrders'                  ;
+import { createOrder              } from './app/useCases/orders/createOrder'                 ;
+import { changeOrderStatus        } from './app/useCases/orders/changeOrderStatus'           ;
+import { cancelOrder              } from './app/useCases/orders/cancelOrder'                 ;
 
 export const router = Router();
 
