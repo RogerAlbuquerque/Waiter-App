@@ -58,4 +58,4 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1rem;
     color: #333;
   }
-`;
+` ;
