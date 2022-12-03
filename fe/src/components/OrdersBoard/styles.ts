@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-
-
-
 export const Board = styled.div`
   padding: 16px;
   border: 1px solid rgba(204,204,204,0.4);
@@ -31,7 +28,6 @@ export const OrdersContainer = styled.div`
 
 
   button{
-    width: 100%;
     background: #fff;
     border: 1px solid rgba(204,204,204,0.4);
     height: 128px;

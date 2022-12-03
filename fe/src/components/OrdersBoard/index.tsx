@@ -1,10 +1,11 @@
 import { Order } from '../../types/Order';
+import { OrderModal } from '../OrderModal/OrderModa';
 import { Board, OrdersContainer } from './styles';
 
 interface OrdersBoardProps {
   icon: string
   title: string
-  order: Order[];
+  orders: Order[];
 
 
   //Essas duas abaixo são formas diferentes de declarar um elemento que é um ARRAY DE OBJETOS
@@ -17,27 +18,35 @@ interface OrdersBoardProps {
 }
 
 
-export function OrdersBoard({icon,title, order}: OrdersBoardProps){
+export function OrdersBoard({icon,title, orders}: OrdersBoardProps){
+
+  function handleOpenModal (){
+    alert('MODAL ABERTO');
+  }
+
   return(
+
     <Board>
+
+      <OrderModal />
       <header>
         <span><img src={icon} alt="Ícone"  width='20'/></span>
         <strong>{title} </strong>
-        <span>(1)</span>
+        <span>({orders.length})</span>
       </header>
 
 
-      <OrdersContainer>
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
+      {orders.length > 0 && (
+        <OrdersContainer>
+          {orders.map((order)=> (
+            <button type='button' key={order._id} onClick={handleOpenModal}>
+              <strong>Mesa {order.table}</strong>
+              <span>{order.products.length} itens</span>
+            </button>
+          ))}
+        </OrdersContainer>
+      )}
 
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-      </OrdersContainer>
     </Board>
   );
 }

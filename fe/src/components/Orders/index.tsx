@@ -43,18 +43,18 @@ export function Orders(){
         <OrdersBoard
           icon={Relogio}
           title="Fila de espera"
-          order={orders}
+          orders={orders}
 
         />
         <OrdersBoard
           icon={Cozinheiro}
           title="Em preparação"
-          order={[]}
+          orders={[]}
         />
         <OrdersBoard
           icon={Check}
           title="Pronto"
-          order={[]}
+          orders={[]}
         />
       </Container>
     </>
