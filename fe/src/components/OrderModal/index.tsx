@@ -26,7 +26,8 @@ export function OrderModal({visible, order, onClose}: OrderModalProps){
 
     document.addEventListener('keydown', handleKeyDown);
 
-    //Essa parte aqui é para remover o "eventListener" do teclado na hora de desmontar o useEffect
+    //Essa parte aqui é para remover o "eventListener" do teclado na hora de desmontar o useEffect e a aplicação
+    //Não ficar mais escutando esse evento do teclado e consumindo recurso,ja que o modal não está mais na tela.
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
