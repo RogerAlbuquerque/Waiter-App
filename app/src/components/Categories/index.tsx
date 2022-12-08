@@ -1,22 +1,39 @@
+import { FlatList } from 'react-native';
+
 import {categories} from '../../mocks/categories';
-import { Text } from '../Text';
 import { Category, Icon } from './styles';
+import { Image } from 'react-native';
 
 
 export function Categories(){
   return (
 
-    categories.map(( category )=> (
-      <Category key={category._id}>
 
-        <Icon>
-          <Text>{category.icon} icone</Text>
-        </Icon>
 
-        <Text size={14} weight="600">{category.name}</Text>
+    <FlatList
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      data={categories}
+      keyExtractor={category => category._id}
+      contentContainerStyle = {{paddingRight: 24}}
+      renderItem={({item: category})=>(
+        <Category>
 
-      </Category>
-    ))
+          <Icon>
+            {category.icon == 'pizza'      && <Image source={require('../../mocks/categoriesIcons/pizza.png')}/>}
+            {category.icon == 'bebidas'    && <Image source={require('../../mocks/categoriesIcons/bebidas.png')}/>}
+            {category.icon == 'hamburguer' && <Image source={require('../../mocks/categoriesIcons/hamburguer.png')}/>}
+            {category.icon == 'promo'      && <Image source={require('../../mocks/categoriesIcons/promo.png')}/>}
+          </Icon>
+
+        </Category>
+      )}
+
+    />
+
+
+
+
 
   );
 }
