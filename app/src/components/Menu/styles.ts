@@ -23,3 +23,15 @@ export const Separator = styled.View`
   background: rgba(204,204,204,0.3);
   margin: 24px 0;
 `;
+
+
+export const AddToCartButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+/* Outra coisa que existe no reeact-native é o position relative ja vir automatico nos elementos
+   Então nesse caso se usar um position absolute, não precisa adicionar no pai um relative.
+   Na web precisa,  no naative não.
+*/
