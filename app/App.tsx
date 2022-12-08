@@ -1,6 +1,9 @@
 import {useFonts} from 'expo-font'; // Esse pacote é para poder instalar outraas fontes no react-native
 import { Main } from './src/Main';
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 
 
 export default function App() {
