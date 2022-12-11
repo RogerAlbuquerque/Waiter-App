@@ -10,12 +10,9 @@ interface OrdersBoardProps {
 
 
   //Essas duas abaixo são formas diferentes de declarar um elemento que é um ARRAY DE OBJETOS
-  // orders:Array<{
-  //   _id:string;
-  // }>
-  // orders:{
-  //   _id:string;
-  // }[];
+  // orders:Array<{_id:string;}>
+
+  // orders:{_id:string;}[];
 }
 
 
