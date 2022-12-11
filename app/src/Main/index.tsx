@@ -15,10 +15,20 @@ export function Main(){
   function handleSaveTable(table: string){
     setSelectedTable(table);
   }
+
+  function handleCancerlOrder(){
+    setSelectedTable('');
+  }
+
+
+
   return(
     <>
       <Container>
-        <Header />
+        <Header
+          selectedTable={selectedTable}
+          onCancelOrder={handleCancerlOrder}
+        />
 
         <CategoriesContainer>
           <Categories />
