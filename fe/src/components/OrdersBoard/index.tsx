@@ -18,16 +18,16 @@ interface OrdersBoardProps {
 
 export function OrdersBoard({icon,title, orders}: OrdersBoardProps){
   const [isModalVisible,setIsModalVisible] = useState(false);
-  const [selectedOrder,setSelectedOrdere] = useState<null | Order>(null);
+  const [selectedOrder,setSelectedOrder] = useState<null | Order>(null);
 
   function handleOpenModal (order:Order){
 
-    setSelectedOrdere(order);
+    setSelectedOrder(order);
     setIsModalVisible(true);
   }
 
   function handleCloseModal(){
-    setSelectedOrdere(null);
+    setSelectedOrder(null);
     setIsModalVisible(false);
   }
 
