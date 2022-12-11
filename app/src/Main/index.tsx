@@ -3,7 +3,7 @@ import { Button } from '../components/Button';
 import { Categories } from '../components/Categories';
 import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
-import { TableModal } from '../components/TabeModas';
+import { TableModal } from '../components/TabelModal';
 import { Container,CategoriesContainer, MenuContainer, Footer, FooterContainer } from './styles';
 
 
@@ -29,10 +29,8 @@ export function Main(){
           <Menu />
         </MenuContainer>
 
-
-
-
       </Container>
+
 
       <Footer>
         <FooterContainer>
