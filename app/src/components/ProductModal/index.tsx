@@ -1,8 +1,10 @@
 import { Modal, ImageBackground, FlatList} from 'react-native';
 import { Product } from '../../types/Product';
+import { formatCurrency } from '../../utils/formaCurrency';
+import { Button } from '../Button';
 import { Close } from '../Icons/Close';
 import { Text } from '../Text';
-import { Image, CloseButton, Header, ModalBody, IngredientsContainer, Ingredient } from './styles';
+import { Image, CloseButton, Header, ModalBody, IngredientsContainer, Ingredient, Footer, FooterContainer, PriceContainer} from './styles';
 
 
 interface ProductModalProps{
@@ -41,25 +43,41 @@ export function ProductModal({visible, onClose, product}:ProductModalProps){
           <Text color='#666' style={{marginTop: 8}}>{product.description}</Text>
         </Header>
 
-        <IngredientsContainer>
-          <Text weight='600' color='#666'>Ingredients</Text>
 
-          <FlatList
-            data={product.ingredients}
-            keyExtractor={ingredient => ingredient._id}
-            style={{marginTop: 16}}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item: ingredient}) => (
-              <Ingredient>
-                <Text>{ingredient.icon}</Text>
-                {/* {ingredient.icon === 'pizza'      && <Image style={{width: 18, height:20}} source={require('../../mocks/categoriesIcons/pizza.png')}/>} */}
-                <Text size={14} color="#666" style={{marginLeft:20}}>{ingredient.name}</Text>
-              </Ingredient>
-            )}
+        {product.ingredients.length > 0 && (
+          <IngredientsContainer>
+            <Text weight='600' color='#666'>Ingredients</Text>
 
-          />
-        </IngredientsContainer>
+            <FlatList
+              data={product.ingredients}
+              keyExtractor={ingredient => ingredient._id}
+              style={{marginTop: 16}}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item: ingredient}) => (
+                <Ingredient>
+                  <Text>{ingredient.icon}</Text>
+                  {/* {ingredient.icon === 'pizza'      && <Image style={{width: 18, height:20}} source={require('../../mocks/categoriesIcons/pizza.png')}/>} */}
+                  <Text size={14} color="#666" style={{marginLeft:20}}>{ingredient.name}</Text>
+                </Ingredient>
+              )}
+
+            />
+          </IngredientsContainer>
+        )}
+
+
       </ModalBody>
+
+      <Footer>
+        <FooterContainer>
+          <PriceContainer>
+            <Text color='#666'>Preço</Text>
+            <Text size={20} weight="600">{formatCurrency(product.price)}</Text>
+          </PriceContainer>
+
+          <Button onPress={()=> alert('Adicionar ao pedido')}> Adiciona ao pedido</Button>
+        </FooterContainer>
+      </Footer>
 
 
 
