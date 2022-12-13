@@ -15,31 +15,31 @@ export function Main(){
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      quantity: 1,
-      product: products[0],
-    },
+    // {
+    //   quantity: 1,
+    //   product: products[0],
+    // },
 
-    {
-      quantity: 2,
-      product: products[1],
-    },
-    {
-      quantity: 2,
-      product: products[2],
-    },
-    {
-      quantity: 2,
-      product: products[3],
-    },
-    {
-      quantity: 2,
-      product: products[4],
-    },
-    {
-      quantity: 2,
-      product: products[5],
-    },
+    // {
+    //   quantity: 2,
+    //   product: products[1],
+    // },
+    // {
+    //   quantity: 2,
+    //   product: products[2],
+    // },
+    // {
+    //   quantity: 2,
+    //   product: products[3],
+    // },
+    // {
+    //   quantity: 2,
+    //   product: products[4],
+    // },
+    // {
+    //   quantity: 2,
+    //   product: products[5],
+    // },
   ]);
 
   function handleSaveTable(table: string){

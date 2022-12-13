@@ -38,11 +38,12 @@ padding-left: 2px;
 export const Summary = styled.View`
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
+justify-content: center;
 
 `;
 export const TotalContainer = styled.View`
-
+margin-right: 32px;
+flex: 1;
 
 `;
 
