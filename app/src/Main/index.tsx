@@ -22,10 +22,16 @@ export function Main(){
     setSelectedTable(table);
   }
 
-  function handleCancerlOrder(){
+  function handleResetOrder(){
     setSelectedTable('');
     setCartItems([]);
   }
+
+  function hadleConfirmOrder(){
+    setSelectedTable('');
+    setCartItems([]);
+  }
+
 
   function handleAddToCart(product: Product){
     if(!selectedTable){
@@ -87,12 +93,14 @@ export function Main(){
     });
   }
 
+
+
   return(
     <>
       <Container>
         <Header
           selectedTable={selectedTable}
-          onCancelOrder={handleCancerlOrder}
+          onCancelOrder={handleResetOrder}
         />
 
         <CategoriesContainer>
@@ -121,6 +129,7 @@ export function Main(){
               cartItems={cartItems}
               onAdd={handleAddToCart}
               onDecrement={handleDecrementCartItem}
+              onConfirmOrder={handleResetOrder}
             />
           )}
 
