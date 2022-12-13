@@ -21,6 +21,8 @@ interface CartProps{
 
 export function Cart({cartItems, onAdd, onDecrement, onConfirmOrder}: CartProps){
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   function handleConfirmOrder(){
     setIsModalVisible(true);
@@ -102,6 +104,7 @@ export function Cart({cartItems, onAdd, onDecrement, onConfirmOrder}: CartProps)
         <Button
           onPress={handleConfirmOrder}
           disabled={cartItems.length === 0}
+          loading={isLoading}
         >
           Confirmar pedido
         </Button>
