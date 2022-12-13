@@ -5,8 +5,8 @@ import { Categories } from '../components/Categories';
 import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
 import { TableModal } from '../components/TableModal';
-import { products } from '../mocks/products';
 import { CartItem } from '../types/CartItems';
+import { Product } from '../types/Product';
 import { Container,CategoriesContainer, MenuContainer, Footer, FooterContainer } from './styles';
 
 
@@ -15,31 +15,7 @@ export function Main(){
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([
-    // {
-    //   quantity: 1,
-    //   product: products[0],
-    // },
 
-    // {
-    //   quantity: 2,
-    //   product: products[1],
-    // },
-    // {
-    //   quantity: 2,
-    //   product: products[2],
-    // },
-    // {
-    //   quantity: 2,
-    //   product: products[3],
-    // },
-    // {
-    //   quantity: 2,
-    //   product: products[4],
-    // },
-    // {
-    //   quantity: 2,
-    //   product: products[5],
-    // },
   ]);
 
   function handleSaveTable(table: string){
@@ -50,7 +26,34 @@ export function Main(){
     setSelectedTable('');
   }
 
+  function handleAddToCart(product: Product){
+    if(!selectedTable){
+      setIsTableModalVisible(true);
+    }
 
+    setCartItems((prevState) => {
+      const itemIndex = prevState.findIndex(cartItem => cartItem.product._id === product._id);
+      /*Esse "findeIndex" vai procurar se o item que ta tentando ser adicionado, ja está no carrinho, se ja tiver ele vai retornar a posição do item,
+      ou seja o sesu index, se ele não estiver no carrinho vai ser retornado -1*/
+
+      if(itemIndex < 0) {
+        return prevState.concat({
+          quantity: 1,
+          product,
+        });
+      }
+
+      const newCartItems = [...prevState];
+      const item = newCartItems[itemIndex];
+
+      newCartItems[itemIndex] = {
+        ...item,
+        quantity: item.quantity + 1
+      };
+
+      return newCartItems;
+    });
+  }
 
   return(
     <>
@@ -66,7 +69,7 @@ export function Main(){
 
 
         <MenuContainer>
-          <Menu />
+          <Menu onAddToCart= {handleAddToCart}/>
         </MenuContainer>
 
       </Container>

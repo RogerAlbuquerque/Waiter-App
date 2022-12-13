@@ -11,13 +11,20 @@ interface ProductModalProps{
   visible: boolean;
   onClose:()=>void;
   product: null | Product;
+  onAddToCart: (product:Product)=> void;
 }
 
-export function ProductModal({visible, onClose, product}:ProductModalProps){
+export function ProductModal({visible, onClose, onAddToCart, product}:ProductModalProps){
 
 
   if(!product){
     return null;
+  }
+
+  function handleAddToCart(){
+    onAddToCart(product!);    /*Essa exclamação serve para dizer para o typescript que mesmo que uma variável possar nula, isso nunca vai acontecer e
+                              que ele pode deixar ela passar sem marcar com erro*/
+    onClose();
   }
 
   return (
@@ -75,7 +82,7 @@ export function ProductModal({visible, onClose, product}:ProductModalProps){
             <Text size={20} weight="600">{formatCurrency(product.price)}</Text>
           </PriceContainer>
 
-          <Button onPress={()=> alert('Adicionar ao pedido')}> Adiciona ao pedido</Button>
+          <Button onPress={handleAddToCart}> Adiciona ao pedido</Button>
         </FooterContainer>
       </Footer>
 
