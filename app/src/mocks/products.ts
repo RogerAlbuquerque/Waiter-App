@@ -29,11 +29,49 @@ export const products = [
     ],
   },
   {
-    _id: '6372e276a381106c0f854cb3',
+    _id: '6372e276a382SA1106c0f854cb3',
     name: 'Coca cola',
     description: 'Coca cola lata geladinha topzera',
     imagePath: '1668473462705-coca-cola.png',
     price: 7,
     ingredients: [],
   },
+
+  {
+    _id: '4',
+    name: 'Coca cola',
+    description: 'Coca cola lata geladinha topzera',
+    imagePath: '1668473462705-coca-cola.png',
+    price: 7,
+    ingredients: [],
+  },
+
+  {
+    _id: '3',
+    name: 'Coca cola',
+    description: 'Coca cola lata geladinha topzera',
+    imagePath: '1668473462705-coca-cola.png',
+    price: 7,
+    ingredients: [],
+  },
+
+  {
+    _id: '2',
+    name: 'Coca cola',
+    description: 'Coca cola lata geladinha topzera',
+    imagePath: '1668473462705-coca-cola.png',
+    price: 7,
+    ingredients: [],
+  },
+
+  {
+    _id: '1',
+    name: 'Coca cola',
+    description: 'Coca cola lata geladinha topzera',
+    imagePath: '1668473462705-coca-cola.png',
+    price: 7,
+    ingredients: [],
+  },
+
+
 ];
