@@ -24,6 +24,7 @@ export function Main(){
 
   function handleCancerlOrder(){
     setSelectedTable('');
+    setCartItems([]);
   }
 
   function handleAddToCart(product: Product){
@@ -33,8 +34,11 @@ export function Main(){
 
     setCartItems((prevState) => {
       const itemIndex = prevState.findIndex(cartItem => cartItem.product._id === product._id);
-      /*Esse "findeIndex" vai procurar se o item que ta tentando ser adicionado, ja está no carrinho, se ja tiver ele vai retornar a posição do item,
-      ou seja o sesu index, se ele não estiver no carrinho vai ser retornado -1*/
+      /*
+      Esse "findeIndex" fazer um loop em todos os elementos da array que nesse caso é o "prevState" que faz referência a todos os itens do state cartItem.
+      Nesse loop ele vai ver se existe algum product que tem o _id igual ao ?_id do produto que veio na função, se tiver, a const vai ter o valor do index
+      desse product e caso ele  não encontre a const vai ficar com o valor de -1
+      */
 
       if(itemIndex < 0) {
         return prevState.concat({
@@ -52,6 +56,34 @@ export function Main(){
       };
 
       return newCartItems;
+    });
+  }
+
+  function handleDecrementCartItem(product: Product){
+
+    setCartItems((prevState) => {
+      const itemIndex = prevState.findIndex(cartItem => cartItem.product._id === product._id);
+
+      const item = prevState[itemIndex];
+      const newCartItems = [...prevState];
+
+      if(item.quantity === 1){
+
+        newCartItems.splice(itemIndex,1);   /* O "splice" ele vai pegar o elemento na posição "itemIndex" e remover até o elemento da posição 1,
+                                               nesse caso será somente ele mesmo */
+
+        return newCartItems;
+      }
+
+
+      newCartItems[itemIndex] = {
+        ...item,
+        quantity: item.quantity - 1
+      };
+
+      return newCartItems;
+
+      // return newCartItems;
     });
   }
 
@@ -85,7 +117,11 @@ export function Main(){
           )}
 
           {selectedTable && (
-            <Cart cartItems={cartItems}/>
+            <Cart
+              cartItems={cartItems}
+              onAdd={handleAddToCart}
+              onDecrement={handleDecrementCartItem}
+            />
           )}
 
         </FooterContainer>
