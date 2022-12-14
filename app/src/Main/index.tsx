@@ -25,19 +25,35 @@ export function Main(){
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
 
-    axios.get('http://192.168.1.8:3001/categories').then((response)=>{
-      setCategories(response.data);
+    // axios.get('http://192.168.1.8:3001/categories').then((response)=>{
+    //   setCategories(response.data);
+    // });
+
+    // DESSE JEITO VAI SER FEITO UMA REQUEST POR VEZ
+
+    // axios.get('http://192.168.1.8:3001/products').then((response)=>{
+    //   setProducts(response.data);
+    // });
+
+    //Aaqui as duas requests vão ser feitas simmultaneamente
+    Promise.all([
+      axios.get('http://192.168.1.8:3001/categories'),
+      axios.get('http://192.168.1.8:3001/products'),
+    ]).then(([categoriesResponse, productResponse])=> { /*Os dados das requisições podem ser acessados em arrays agora, cada posição de acordo com a
+                                                        posição de chamada da requisição. Sabendo disso, é possível então invés de pegar as posições
+                                                        acessando "response[0]" da pra desestruturar isso  */
+      setCategories(categoriesResponse.data);
+      setProducts(productResponse.data);
+      setIsLoading(false);
     });
 
-    axios.get('http://192.168.1.8:3001/products').then((response)=>{
-      setProducts(response.data);
-    });
+
 
   },[]);
 
