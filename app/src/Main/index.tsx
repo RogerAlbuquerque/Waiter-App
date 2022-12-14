@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import { ActivityIndicator } from 'react-native';
 import { Button } from '../components/Button';
@@ -18,6 +17,7 @@ import { Container,CategoriesContainer, MenuContainer, Footer, FooterContainer, 
 import { Empty } from '../components/Icons/Empty';
 import { Text } from '../components/Text';
 import { Category } from '../types/Category';
+import { api } from '../utils/api';
 
 
 export function Main(){
@@ -41,10 +41,10 @@ export function Main(){
     //   setProducts(response.data);
     // });
 
-    //Aaqui as duas requests vão ser feitas simmultaneamente
+    //Aqui as duas requests vão ser feitas simultaneamente
     Promise.all([
-      axios.get('http://192.168.1.8:3001/categories'),
-      axios.get('http://192.168.1.8:3001/products'),
+      api.get('/categories'),
+      api.get('/products'),
     ]).then(([categoriesResponse, productResponse])=> { /*Os dados das requisições podem ser acessados em arrays agora, cada posição de acordo com a
                                                         posição de chamada da requisição. Sabendo disso, é possível então invés de pegar as posições
                                                         acessando "response[0]" da pra desestruturar isso  */
