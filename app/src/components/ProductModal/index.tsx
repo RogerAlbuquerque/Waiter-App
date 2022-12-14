@@ -7,6 +7,8 @@ import { Text } from '../Text';
 import { Image, CloseButton, Header, ModalBody, IngredientsContainer, Ingredient, Footer, FooterContainer, PriceContainer} from './styles';
 
 
+
+
 interface ProductModalProps{
   visible: boolean;
   onClose:()=>void;
@@ -62,8 +64,17 @@ export function ProductModal({visible, onClose, onAddToCart, product}:ProductMod
               showsVerticalScrollIndicator={false}
               renderItem={({item: ingredient}) => (
                 <Ingredient>
-                  <Text>{ingredient.icon}</Text>
-                  {/* {ingredient.icon === 'pizza'      && <Image style={{width: 18, height:20}} source={require('../../mocks/categoriesIcons/pizza.png')}/>} */}
+
+                  {/* <Text>{ingredient.icon}</Text> */}
+
+                  {ingredient.icon === 'batata'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/batata.png')}/>}
+                  {ingredient.icon === 'bebida'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/bebida.png')}/>}
+                  {ingredient.icon === 'carne'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/carne.png')}/>}
+                  {ingredient.icon === 'ovo'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/ovo.png')}/>}
+                  {ingredient.icon === 'pao'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/pao.png')}/>}
+                  {ingredient.icon === 'queijo'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/queijo.png')}/>}
+                  {ingredient.icon === 'tomate'      && <Image style={{width: 20, height:22}} source={require('../../mocks/ingredientsIcons/tomate.png')}/>}
+
                   <Text size={14} color="#666" style={{marginLeft:20}}>{ingredient.name}</Text>
                 </Ingredient>
               )}
