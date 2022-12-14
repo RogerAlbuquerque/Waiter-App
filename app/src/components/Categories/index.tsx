@@ -1,13 +1,16 @@
 import { FlatList } from 'react-native';
 
-import {categories} from '../../mocks/categories';
-import { Category, Icon } from './styles';
+
+import { CategoryContainer, Icon } from './styles';
 import { Image } from 'react-native';
 import { useState } from 'react';
 import { Text } from '../Text';
+import { Category } from '../../types/Category';
 
-
-export function Categories(){
+interface CategoriesProps{
+  categories: Category[];
+}
+export function Categories({categories}: CategoriesProps){
 
   const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -29,18 +32,18 @@ export function Categories(){
         const isSelected = selectedCategory === category._id;
         return(
 
-          <Category onPress={() => handleSelectCategory(category._id)}>
+          <CategoryContainer onPress={() => handleSelectCategory(category._id)}>
 
             <Icon style={{opacity: isSelected ? 1 : 0.5}}>
               {category.icon == 'pizza'      && <Image source={require('../../mocks/categoriesIcons/pizza.png')}/>}
-              {category.icon == 'bebidas'    && <Image source={require('../../mocks/categoriesIcons/bebidas.png')}/>}
-              {category.icon == 'hamburguer' && <Image source={require('../../mocks/categoriesIcons/hamburguer.png')}/>}
+              {category.icon == 'bebida'    && <Image source={require('../../mocks/categoriesIcons/bebidas.png')}/>}
+              {category.icon == 'Hamburguer' && <Image source={require('../../mocks/categoriesIcons/hamburguer.png')}/>}
               {category.icon == 'promo'      && <Image source={require('../../mocks/categoriesIcons/promo.png')}/>}
             </Icon>
 
             <Text size={14} weight="600" opacity={isSelected ? 1 : 0.5}>{category.name}</Text>
 
-          </Category>
+          </CategoryContainer>
 
         );
       }
