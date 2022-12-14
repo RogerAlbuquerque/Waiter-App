@@ -41,7 +41,7 @@ export function Main(){
     //   setProducts(response.data);
     // });
 
-    //Aqui as duas requests vão ser feitas simultaneamente
+    //Aqui as duas requests vão ser feitas juntas
     Promise.all([
       api.get('/categories'),
       api.get('/products'),
