@@ -57,6 +57,16 @@ export function Main(){
 
   },[]);
 
+  async function handleSelectCategory(categoryId: string){
+    // const route =`/categories/${categoryId}/products`;
+    const route = !categoryId ? '/products' : `/categories/${categoryId}/products`;
+
+    /*O "data" desse jeito é uma forma de desestrutura a resposta da requisição, então ele ja vai pegar direto o "data" tipo como  se fosse "response.data" */
+    const { data } = await api.get(route);
+
+    setProducts(data);
+
+  }
 
   function handleSaveTable(table: string){
     setSelectedTable(table);
@@ -150,7 +160,7 @@ export function Main(){
         ): (
           <>
             <CategoriesContainer>
-              <Categories categories={categories}/>
+              <Categories categories={categories} onSelectCategory={handleSelectCategory}/>
             </CategoriesContainer>
 
 
