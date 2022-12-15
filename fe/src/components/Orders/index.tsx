@@ -16,7 +16,7 @@ export function Orders(){
 
   useEffect (()=> {
     const socket = socketIo('http://localhost:3001', {
-      transports: ['websockets'],
+      transports: ['websocket'],
     });
   },[]);
 

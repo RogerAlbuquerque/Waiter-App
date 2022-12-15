@@ -13,6 +13,8 @@ mongoose.connect('mongodb://127.0.0.1:27017')
     const io = new Server(server);
     const port = 3001;
 
+    io.on('connect', ()=>{ console.log('alguem se conectou ao server');});
+
     /* Basicamente isso aqui é para resolver o erro de "CORS" no frontend, isso vai dar permissões em algumas coisas que acessarem essa API */
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');  /*Isso aqui diz que essa URL tem permissão para acessar a API.Se for uma API publica coloca o asterisco que ai qualquer frontend pode acessar ela.*/
