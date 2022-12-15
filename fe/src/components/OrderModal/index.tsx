@@ -1,7 +1,7 @@
 import closeIcon from '../../assets/images/close-icon.svg';
 
 import relogio from '../../assets/images/relogio.svg';
-import cozinheiro from '../../assets/images/relogio.svg';
+import cozinheiro from '../../assets/images/cozinheiro.svg';
 import check from '../../assets/images/check.svg';
 import { Order } from '../../types/Order';
 
@@ -109,8 +109,14 @@ export function OrderModal({visible, order, onClose, onCancelOrder, isLoading, o
         <Actions>
           {order.status !== 'DONE' && (
             <button type='button' className='primary' disabled={isLoading} onClick={onChangeOrderStatus}>
-              <span><img src={cozinheiro} alt="" /></span>
-              <strong>Iniciar Produção</strong>
+              <span>
+                {order.status === 'WAITING'       && <img src={cozinheiro}    alt="" width='20 '/>}
+                {order.status === 'IN_PRODUCTION' && <img src={check} alt="" width='20 '/>}
+              </span>
+              <strong>
+                {order.status === 'WAITING'       && 'Iniciar Produção'}
+                {order.status === 'IN_PRODUCTION' && 'Concluir Pedido'}
+              </strong>
             </button>
           )}
 
