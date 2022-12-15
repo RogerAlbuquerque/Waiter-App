@@ -28,15 +28,24 @@ export function Orders(){
     setOrders((prevState) => prevState.filter(order => order._id !== orderId));
   }
 
+  /*
+    Esse "Order['status']" ta dizendo basicamente que a variável "status" tem o mesmo tipo que o campo 'status' dentro da
+    tipagem de "Order", dava pra escrever a tipagem disso aqui também, mas o código ficaria muito grande
+  */
+  function handleOrderStatuschange(orderId: string, status: Order['status']){
+    setOrders((prevState) => prevState.map((order) =>(
+      order._id === orderId ? { ...order, status} : order
+    )));
+  }
   return(
     <>
       <Container>
-
         <OrdersBoard
           icon={Relogio}
           title="Fila de espera"
-          orders={orders}
+          orders={waiting}
           onCancelOrder={handleCancelOrder}
+          onChangeOrderStatus={handleOrderStatuschange}
 
         />
         <OrdersBoard
@@ -44,12 +53,14 @@ export function Orders(){
           title="Em preparação"
           orders={inProduction}
           onCancelOrder={handleCancelOrder}
+          onChangeOrderStatus={handleOrderStatuschange}
         />
         <OrdersBoard
           icon={Check}
           title="Pronto"
           orders={done}
           onCancelOrder={handleCancelOrder}
+          onChangeOrderStatus={handleOrderStatuschange}
         />
       </Container>
     </>

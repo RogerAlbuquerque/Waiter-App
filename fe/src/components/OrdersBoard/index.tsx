@@ -11,6 +11,7 @@ interface OrdersBoardProps {
   title: string
   orders: Order[];
   onCancelOrder: (ordersId: string) => void;
+  onChangeOrderStatus:(ordersId: string, status: Order['status']) => void;
 
 
   //Essas duas abaixo são formas diferentes de declarar um elemento que é um ARRAY DE OBJETOS
@@ -20,7 +21,7 @@ interface OrdersBoardProps {
 }
 
 
-export function OrdersBoard({icon,title, orders, onCancelOrder}: OrdersBoardProps){
+export function OrdersBoard({icon,title, orders, onCancelOrder, onChangeOrderStatus}: OrdersBoardProps){
   const [isModalVisible,setIsModalVisible] = useState(false);
   const [isLoading,setIsLoading] = useState(false);
   const [selectedOrder,setSelectedOrder] = useState<null | Order>(null);
@@ -31,10 +32,27 @@ export function OrdersBoard({icon,title, orders, onCancelOrder}: OrdersBoardProp
     setIsModalVisible(true);
   }
 
+
   function handleCloseModal(){
     setSelectedOrder(null);
     setIsModalVisible(false);
   }
+
+
+  async function handleChangeOrderStatus(){
+    setIsLoading(true);
+
+    const status = selectedOrder?.status === 'WAITING' ? 'IN_PRODUCTION' : 'DONE';
+
+    await api.patch(`/orders/${selectedOrder?._id}`, {status});  /* A ultima parte entre chaves é o corpo da requisição */
+
+    toast.success(`O pedido da mesa ${selectedOrder!.table} Teve o status alterado!`);
+    onChangeOrderStatus(selectedOrder!._id, status );
+    setIsLoading(false);
+    setIsModalVisible(false);
+
+  }
+
 
   async function handleCancelOrder(){
     setIsLoading(true);
@@ -56,6 +74,7 @@ export function OrdersBoard({icon,title, orders, onCancelOrder}: OrdersBoardProp
         onClose={handleCloseModal}
         onCancelOrder={handleCancelOrder}
         isLoading={isLoading}
+        onChangeOrderStatus={handleChangeOrderStatus}
 
       />
 

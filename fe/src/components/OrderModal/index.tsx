@@ -14,10 +14,11 @@ interface OrderModalProps {
   order: Order | null;
   onClose:()=> void;
   onCancelOrder: () => Promise<void>;
+  onChangeOrderStatus:() => void;
   isLoading: boolean;
 }
 
-export function OrderModal({visible, order, onClose, onCancelOrder, isLoading}: OrderModalProps){
+export function OrderModal({visible, order, onClose, onCancelOrder, isLoading, onChangeOrderStatus}: OrderModalProps){
 
   useEffect(()=>{ //Funcção para fechar o modal só apertando o "ESC"
     function handleKeyDown(event: KeyboardEvent){
@@ -106,10 +107,12 @@ export function OrderModal({visible, order, onClose, onCancelOrder, isLoading}: 
         </OrderDetails>
 
         <Actions>
-          <button type='button' className='primary' disabled={isLoading}>
-            <span><img src={cozinheiro} alt="" /></span>
-            <strong>Iniciar Produção</strong>
-          </button>
+          {order.status !== 'DONE' && (
+            <button type='button' className='primary' disabled={isLoading} onClick={onChangeOrderStatus}>
+              <span><img src={cozinheiro} alt="" /></span>
+              <strong>Iniciar Produção</strong>
+            </button>
+          )}
 
           <button
             type='button'
