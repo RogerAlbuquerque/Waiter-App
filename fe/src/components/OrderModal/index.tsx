@@ -1,7 +1,7 @@
 import closeIcon from '../../assets/images/close-icon.svg';
 
 import relogio from '../../assets/images/relogio.svg';
-import cozinheiro from '../../assets/images/cozinheiro.svg';
+import cozinheiro from '../../assets/images/relogio.svg';
 import check from '../../assets/images/check.svg';
 import { Order } from '../../types/Order';
 
@@ -82,14 +82,14 @@ export function OrderModal({visible, order, onClose}: OrderModalProps){
 
           <strong>Itens</strong>
           <div className="order-items">
-            {order.products.map(({_id, product,quantity})=>(
+            {order.products.map(({ _id, product,quantity })=>(
               <div className="item" key={_id}>
                 <img src={`http://localhost:3001/uploads/${product.imagePath}`} alt={product.name} width='56' height='28.51'/>
 
                 <span className="quantity">{quantity}x</span>
 
                 <div className="product-details">
-                  <strong>{product.name}</strong>
+                  <strong>{product.name} </strong>
                   <span>{formatCurrency(product.price)}</span>
                 </div>
               </div>
