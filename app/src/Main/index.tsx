@@ -26,6 +26,7 @@ export function Main(){
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -61,10 +62,13 @@ export function Main(){
     // const route =`/categories/${categoryId}/products`;
     const route = !categoryId ? '/products' : `/categories/${categoryId}/products`;
 
+    setIsLoadingProducts(true);
     /*O "data" desse jeito é uma forma de desestrutura a resposta da requisição, então ele ja vai pegar direto o "data" tipo como  se fosse "response.data" */
     const { data } = await api.get(route);
 
+
     setProducts(data);
+    setIsLoadingProducts(false);
 
   }
 
@@ -163,19 +167,29 @@ export function Main(){
               <Categories categories={categories} onSelectCategory={handleSelectCategory}/>
             </CategoriesContainer>
 
-
-            {products.length > 0 ? (
-              <MenuContainer>
-                <Menu onAddToCart= {handleAddToCart} products={products}/>
-              </MenuContainer>
-            ):(
+            {isLoadingProducts?(
               <CenteredContainer>
-                <Empty />
-                <Text color='#666' style={{marginTop: 24}}>
-                  Nenhum produto foi encontrado!
-                </Text>
+                <ActivityIndicator color="#D73035" size="large"/>
               </CenteredContainer>
+            ):(
+              <>
+                {products.length > 0 ? (
+                  <MenuContainer>
+                    <Menu onAddToCart= {handleAddToCart} products={products}/>
+                  </MenuContainer>
+                ):(
+                  <CenteredContainer>
+                    <Empty />
+                    <Text color='#666' style={{marginTop: 24}}>
+                      Nenhum produto foi encontrado!
+                    </Text>
+                  </CenteredContainer>
+                )}
+              </>
             )}
+
+
+
           </>
         ) }
 
