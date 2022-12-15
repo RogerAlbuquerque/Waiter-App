@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Order } from '../../types/Order';
+import { api } from '../../utils/api';
 import { OrderModal } from '../OrderModal';
 import { Board, OrdersContainer } from './styles';
 
@@ -7,6 +8,7 @@ interface OrdersBoardProps {
   icon: string
   title: string
   orders: Order[];
+  onCancelOrder: (ordersId: string) => void;
 
 
   //Essas duas abaixo são formas diferentes de declarar um elemento que é um ARRAY DE OBJETOS
@@ -16,8 +18,9 @@ interface OrdersBoardProps {
 }
 
 
-export function OrdersBoard({icon,title, orders}: OrdersBoardProps){
+export function OrdersBoard({icon,title, orders, onCancelOrder}: OrdersBoardProps){
   const [isModalVisible,setIsModalVisible] = useState(false);
+  const [isLoading,setIsLoading] = useState(false);
   const [selectedOrder,setSelectedOrder] = useState<null | Order>(null);
 
   function handleOpenModal (order:Order){
@@ -31,6 +34,16 @@ export function OrdersBoard({icon,title, orders}: OrdersBoardProps){
     setIsModalVisible(false);
   }
 
+  async function handleCancelOrder(){
+    setIsLoading(true);
+
+    await api.delete(`/orders/${selectedOrder?._id}`);
+
+    onCancelOrder(selectedOrder!._id);
+    setIsLoading(false);
+    setIsModalVisible(false);
+  }
+
   return(
 
     <Board>
@@ -38,6 +51,9 @@ export function OrdersBoard({icon,title, orders}: OrdersBoardProps){
         visible={isModalVisible}
         order={selectedOrder}
         onClose={handleCloseModal}
+        onCancelOrder={handleCancelOrder}
+        isLoading={isLoading}
+
       />
 
       <header>
