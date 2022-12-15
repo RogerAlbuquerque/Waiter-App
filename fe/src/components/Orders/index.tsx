@@ -19,6 +19,12 @@ export function Orders(){
         setOrders(data);
       });
   },[]);
+
+  const waiting = orders.filter((order) => order.status === 'WAITING');
+  const inProduction = orders.filter((order) => order.status === 'IN_PRODUCTION');
+  const done = orders.filter((order) => order.status === 'DONE');
+
+
   return(
     <>
       <Container>
@@ -32,12 +38,12 @@ export function Orders(){
         <OrdersBoard
           icon={Cozinheiro}
           title="Em preparação"
-          orders={orders}
+          orders={inProduction}
         />
         <OrdersBoard
           icon={Check}
           title="Pronto"
-          orders={orders}
+          orders={done}
         />
       </Container>
     </>
