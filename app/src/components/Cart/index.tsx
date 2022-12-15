@@ -30,7 +30,7 @@ export function Cart({cartItems, onAdd, onDecrement, onConfirmOrder, selectedTab
   async function handleConfirmOrder(){
     const payload = {
       table: selectedTable,
-      product: cartItems.map((cartItem) =>({
+      products: cartItems.map((cartItem) =>({
         product:cartItem.product._id,
         quantity:cartItem.quantity
       }))
