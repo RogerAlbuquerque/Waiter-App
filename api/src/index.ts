@@ -1,13 +1,16 @@
 import path from 'node:path';
-
+import http from 'node:http';
 import express from 'express';
 import mongoose from 'mongoose';
+import {Server} from 'socket.io';
 
 import { router } from './router';
 
 mongoose.connect('mongodb://127.0.0.1:27017')
   .then(()=> {
     const app = express();
+    const server = http.createServer(app);
+    const io = new Server(server);
     const port = 3001;
 
     /* Basicamente isso aqui é para resolver o erro de "CORS" no frontend, isso vai dar permissões em algumas coisas que acessarem essa API */
@@ -29,7 +32,7 @@ mongoose.connect('mongodb://127.0.0.1:27017')
     app.use(express.json());
     app.use(router);
 
-    app.listen(3001, () => {
+    server.listen(3001, () => {
       console.log(`Server is runnig on http://localhost:${port}`);
     });
 
