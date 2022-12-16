@@ -18,6 +18,13 @@ export function Orders(){
     const socket = socketIo('http://localhost:3001', {
       transports: ['websocket'],
     });
+
+    socket.on('orders@new', (order)=>{
+
+      setOrders(prevState => prevState.concat(order));
+
+    });
+
   },[]);
 
 

@@ -6,11 +6,12 @@ import {Server} from 'socket.io';
 
 import { router } from './router';
 
+const app = express();
+const server = http.createServer(app);
+export const io = new Server(server);
 mongoose.connect('mongodb://127.0.0.1:27017')
   .then(()=> {
-    const app = express();
-    const server = http.createServer(app);
-    const io = new Server(server);
+
     const port = 3001;
 
     io.on('connect', ()=>{ console.log('alguem se conectou ao server');});
