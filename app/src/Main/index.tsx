@@ -9,8 +9,7 @@ import { Menu } from '../components/Menu';
 import { TableModal } from '../components/TableModal';
 import { CartItem } from '../types/CartItems';
 import { Product } from '../types/Product';
-// import { products as mockProducts } from '../mocks/products';
-// import { categories as mockCategories } from '../mocks/categories';
+
 
 import { Container,CategoriesContainer, MenuContainer, Footer, FooterContainer, CenteredContainer } from './styles';
 
