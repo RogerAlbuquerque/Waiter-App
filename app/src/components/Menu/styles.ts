@@ -31,7 +31,8 @@ export const AddToCartButton = styled.TouchableOpacity`
   right: 0;
 `;
 
-/* Outra coisa que existe no reeact-native é o position relative ja vir automatico nos elementos
+/*
+  Outra coisa que existe no react-native é o position relative ja vir automatico nos elementos
    Então nesse caso se usar um position absolute, não precisa adicionar no pai um relative.
    Na web precisa,  no naative não.
 */

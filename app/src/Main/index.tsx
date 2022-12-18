@@ -10,7 +10,6 @@ import { TableModal } from '../components/TableModal';
 import { CartItem } from '../types/CartItems';
 import { Product } from '../types/Product';
 
-
 import { Container,CategoriesContainer, MenuContainer, Footer, FooterContainer, CenteredContainer } from './styles';
 
 import { Empty } from '../components/Icons/Empty';
@@ -45,15 +44,13 @@ export function Main(){
     Promise.all([
       api.get('/categories'),
       api.get('/products'),
-    ]).then(([categoriesResponse, productResponse])=> { /*Os dados das requisições podem ser acessados em arrays agora, cada posição de acordo com a
-                                                        posição de chamada da requisição. Sabendo disso, é possível então invés de pegar as posições
-                                                        acessando "response[0]" da pra desestruturar isso  */
+    ]).then(([categoriesResponse, productResponse])=> { /* Os dados das requisições podem ser acessados em arrays agora, cada posição de acordo com a
+                                                           posição de chamada da requisição. Sabendo disso, é possível então invés de pegar as posições
+                                                           acessando "response[0]" da pra desestruturar isso  */
       setCategories(categoriesResponse.data);
       setProducts(productResponse.data);
       setIsLoading(false);
     });
-
-
 
   },[]);
 
