@@ -6,10 +6,19 @@ import {Server} from 'socket.io';
 
 import { router } from './router';
 
+// interface teste [
+//   LinkDB: stringNodeJS.Process;
+// ]
+
+
+
 const app = express();
 const server = http.createServer(app);
+
+
 export const io = new Server(server);
-mongoose.connect('mongodb://127.0.0.1:27017')
+
+mongoose.connect(process.env.MONGODB_URI!)
   .then(()=> {
 
     const port = 3001;
@@ -36,7 +45,7 @@ mongoose.connect('mongodb://127.0.0.1:27017')
     app.use(router);
 
     server.listen(3001, () => {
-      console.log(`Server is runnig on http://localhost:${port}`);
+      console.log('Server is runnig on Atlas MongoDBs');
     });
 
   })
