@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.io = void 0;
+const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -29,7 +30,7 @@ mongoose_1.default.connect(process.env.MONGODB_URI)
     // Isso aqui é basicamente uma rota para o node mostrar arquivos estáticos da pasta de "uploads" browser
     // caso alguem acesse "uploads/nomeImagem" e o nome dessa imagem estiver na pasta "uploads" ela vai ser acesasda no browser
     // Isso vai ser preciso para poder pegar as imagens no frontend.
-    app.use('/uploads', express_1.default.static('./uploads'));
+    app.use('/uploads', express_1.default.static(path_1.default.resolve(__dirname, '..', 'uploads')));
     // Serve para pegar qualquer requisição e transformar para json. e tem que vir antes do arquivo de rotas.
     app.use(express_1.default.json());
     app.use(router_1.router);
