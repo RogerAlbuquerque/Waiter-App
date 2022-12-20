@@ -18,6 +18,7 @@ export function Orders(){
     const socket = socketIo(import.meta.env.VITE_API_URI, {
       transports: ['websocket'],
     });
+    /** Teste */
 
     socket.on('orders@new', (order)=>{
 
