@@ -29,7 +29,7 @@ mongoose_1.default.connect(process.env.MONGODB_URI)
     // Isso aqui é basicamente uma rota para o node mostrar arquivos estáticos da pasta de "uploads" browser
     // caso alguem acesse "uploads/nomeImagem" e o nome dessa imagem estiver na pasta "uploads" ela vai ser acesasda no browser
     // Isso vai ser preciso para poder pegar as imagens no frontend.
-    app.use('/uploads', express_1.default.static('../uploads'));
+    app.use('/uploads', express_1.default.static('./uploads'));
     // Serve para pegar qualquer requisição e transformar para json. e tem que vir antes do arquivo de rotas.
     app.use(express_1.default.json());
     app.use(router_1.router);

@@ -21,7 +21,7 @@ exports.router = (0, express_1.Router)();
 const upload = (0, multer_1.default)({
     storage: multer_1.default.diskStorage({
         destination(req, file, callback) {
-            callback(null, '../uploads');
+            callback(null, './uploads');
         },
         filename(req, file, callback) {
             callback(null, `${Date.now()}-${file.originalname}`);
