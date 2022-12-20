@@ -52,9 +52,11 @@ export function Orders(){
       order._id === orderId ? { ...order, status} : order
     )));
   }
+
   return(
     <>
       <Container>
+
         <OrdersBoard
           icon={Relogio}
           title="Fila de espera"
