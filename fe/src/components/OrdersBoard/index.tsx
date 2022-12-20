@@ -27,7 +27,7 @@ export function OrdersBoard({icon,title, orders, onCancelOrder, onChangeOrderSta
   const [selectedOrder,setSelectedOrder] = useState<null | Order>(null);
 
   function handleOpenModal (order:Order){
-
+    console.log(order);
     setSelectedOrder(order);
     setIsModalVisible(true);
   }
