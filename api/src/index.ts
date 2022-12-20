@@ -5,9 +5,8 @@ import {Server} from 'socket.io';
 
 import { router } from './router';
 
-// interface teste [
-//   LinkDB: stringNodeJS.Process;
-// ]
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 
@@ -26,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI!)
 
     /* Basicamente isso aqui é para resolver o erro de "CORS" no frontend, isso vai dar permissões em algumas coisas que acessarem essa API */
     app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');  /*Isso aqui diz que essa URL tem permissão para acessar a API.Se for uma API publica coloca o asterisco que ai qualquer frontend pode acessar ela.*/
+      res.setHeader('Access-Control-Allow-Origin', '*');  /*Isso aqui diz que essa URL tem permissão para acessar a API.Se for uma API publica coloca o asterisco que ai qualquer frontend pode acessar ela.*/
       res.setHeader('Access-Control-Allow-Methods', '*'); /* Esse aqui indica quais métodos são permitidos nessa API "GET,POST,PATCH..." o asterisco é para permitir todos.*/
       res.setHeader('Access-Control-Allow-Headers', '*');
 
@@ -37,7 +36,7 @@ mongoose.connect(process.env.MONGODB_URI!)
     // Isso aqui é basicamente uma rota para o node mostrar arquivos estáticos da pasta de "uploads" browser
     // caso alguem acesse "uploads/nomeImagem" e o nome dessa imagem estiver na pasta "uploads" ela vai ser acesasda no browser
     // Isso vai ser preciso para poder pegar as imagens no frontend.
-    app.use('/uploads', express.static('../uploads'));
+    app.use('/uploads', express.static('./uploads'));
 
     // Serve para pegar qualquer requisição e transformar para json. e tem que vir antes do arquivo de rotas.
     app.use(express.json());
@@ -49,7 +48,6 @@ mongoose.connect(process.env.MONGODB_URI!)
 
   })
   .catch((error)=> console.log(error));
-
 
 
 
