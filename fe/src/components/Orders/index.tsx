@@ -15,7 +15,7 @@ export function Orders(){
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect (()=> {
-    const socket = socketIo('https://waiterapp-api.onrender.com/', {
+    const socket = socketIo(import.meta.env.VITE_API_URI, {
       transports: ['websocket'],
     });
 
