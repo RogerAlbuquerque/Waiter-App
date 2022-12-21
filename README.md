@@ -1,6 +1,9 @@
 # Projeto fullstack de estudos
 Projeto de um app para auxiliar em restaurantes, divido em um app mobile que fica com o garçom no qual ele vai em cada mesa e anota os pedidos de cada cliente e envia o pedido através do backend para o app frontend que fica na cozinha. Lá eles olham os pedidos e pra quais mesas são cada pedido e vai só mudando o status se o pedido ta sendo preparado, se está em espera, ou seja foi finalizado.
 
+### Link para a aplicação web:
+`https://waiter-app-virid.vercel.app/`
+
 # Tecnologias usadas
 * Typescript foi usado em tudo, front, back e mobile.
 * EsLint também para deixar o código todo mais padronizado e organizado.
