@@ -3,13 +3,18 @@
     "name": "WaitterApp",
     "slug": "WaitterApp",
     "version": "1.0.0",
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#D73035"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,16 +23,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.codenine.waiterapp",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.codenine.waiterapp",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#D73035"
       }
     },
     "web": {
       "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d3ab4e33-b8de-415d-9cf0-da24eb2d4493"
+      }
     }
   }
 }
