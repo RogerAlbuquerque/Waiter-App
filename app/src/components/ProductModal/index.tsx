@@ -38,7 +38,7 @@ export function ProductModal({visible, onClose, onAddToCart, product}:ProductMod
     >
       <Image
         source={{
-          uri: `http://192.168.1.8:3001/uploads/${product.imagePath}`,
+          uri: `${process.env.URI_API}/uploads/${product.imagePath}`,
         }}
       >
         <CloseButton onPress={onClose}>

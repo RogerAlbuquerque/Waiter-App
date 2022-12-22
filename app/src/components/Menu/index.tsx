@@ -24,7 +24,6 @@ export function Menu({onAddToCart, products}: MenuProps){
 
   return (
     <>
-
       <ProductModal
         visible={isModalVisible}
         onClose={()=> setIsModalVisible(false)}
@@ -42,7 +41,7 @@ export function Menu({onAddToCart, products}: MenuProps){
           <ProductContainer onPress={()=> handleOpenModal(product)}>
             <ProductImage
               source={{
-                uri: `http://192.168.1.8:3001/uploads/${product.imagePath}`,
+                uri: `${process.env.URI_API}/uploads/${product.imagePath}`,
               }}
             />
 
