@@ -1,54 +1,54 @@
-# Projeto fullstack de estudos
-Projeto de um app para auxiliar em restaurantes, divido em um app mobile que fica com o garçom no qual ele vai em cada mesa e anota os pedidos de cada cliente e envia o pedido através do backend para o app frontend que fica na cozinha. Lá eles olham os pedidos e pra quais mesas são cada pedido e vai só mudando o status se o pedido ta sendo preparado, se está em espera, ou seja foi finalizado.
+# Fullstack study project
+Project of an app to help in restaurants, divided into a mobile app that stays with the waiter in which he goes to each table and takes the orders of each customer and sends the order through the backend to the frontend app that is in the kitchen. There they look at the orders and which tables each order is for and it just changes the status if the order is being prepared, if it is on hold, or it has been completed.
 
-### Link para a aplicação web:
+### Link to the web application:
 `https://waiter-app-virid.vercel.app/`
 
-# Tecnologias usadas
-* Typescript foi usado em tudo, front, back e mobile.
-* EsLint também para deixar o código todo mais padronizado e organizado.
+# Technologies used
+* Typescript was used on everything, front, back and mobile.
+* EsLint also to make the whole code more standardized and organized.
 
 ### BACKEND:
 * Express
-* O banco de dados foi o mongo só que com docker 
-* Mongoose para fazer as interações entre o back e o mongo
-* Foi usado multer também pra poder receber imagens nas requisições pro backend
+* The database was mongo only with docker
+* Mongoose to do the interactions between back and mongo
+* Multer was also used to be able to receive images in requests for the backend
 
 
 ### FRONTEND:
 * React
-* Axios para fazer requisições para o backend
-* Styled-components para fazer os estilos.
-* toastify para criar aquelas caixinhas de texto quando finaliza alguma coisa
+* Axios to make requests to the backend
+* Styled-components to make the styles.
+* toastify to create those little text boxes when you finish something
 
 ### MOBILE:
 * React-Native
-* Expo para facilitar algumas implementaçõs
-* Axios também foi usado aqui
+* Expo to facilitate some implementations
+* Axios was also used here
 * Styled-Component
 * toastify
 
 
-# Como iniciar o projeto na sua máquina:
-1. Primeiro vai em cada pasta do projeto, abre o terminal lá e ditia o comando `yarn` para instalar todas as dependências ou pode ser `npm install`.
+# How to start the project on your machine:
+1. First go to each project folder, open the terminal there and issue the `yarn` command to install all dependencies or you can use `npm install`.
 
-2. Depois de tudo instalado é preciso ter o Mongo instalado na maquina, ou rodando em um container docker na porta "27017" (Essa porta pode ser alterada dentro do arquivo "index" no dento da pasta da API).
+2. After everything is installed, Mongo must be installed on the machine, or running in a docker container on port "27017" (This port can be changed in the "index" file inside the API folder).
 
-3. Agora no frontend (a pasta "fe") é preciso ir dentro da pasta "utils" e mudar o ip dentro dela para o ip local da sua maquina. Esse é o ip base que o axios está utilizando para fazer requisições. 
+3. Now in the frontend (the "fe" folder) you need to go inside the "utils" folder and change the ip inside it to the local ip of your machine. This is the base ip that axios is using to make requests.
 
-4. Dentro da pasta do projeto mobile é preciso fazer a mesma coisa na pasta "utils" alternando o ip para o ip local da sua máquina.
+4. Inside the mobile project folder, do the same thing in the "utils" folder, changing the ip to your machine's local ip.
 
-5. E por último, é preciso ter o Expo Go no celular, para ler o QRcode que vai ser gerado ao rodar o mobile no pc.
+5. And finally, you must have Expo Go on your cell phone to read the QRcode that will be generated when running the mobile on your PC.
 
-Depois disso seu projeto ja está pronto para ser iniciado, agora só é preciso iniciar todos eles, backend, frontend, mobile e o banco de dados do mongo (caso você o rode em container docker também).
-Para inicia-los são os seguintes comandos:
+After that, your project is ready to be started, now you just need to start all of them, backend, frontend, mobile and the mongo database (if you run it in a docker container as well).
+To start them are the following commands:
 
 ~~~
 
 /* Backend */
 yarn start
 
-/* Frontend */
+/* Front End */
 yarn dev
 
 /* Mobile */
@@ -57,11 +57,11 @@ yarn start
 ~~~
 
 
-# Instaladno o mongo em um container docker na sua máquina
-1. Primeiramente você precisa ter o docker instalado na sua maquina, eu instalei no meu linux por esse site `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-debian-9-pt`
+# Installing mongo in a docker container on your machine
+1. First you need to have docker installed on your machine, I installed it on my linux through this site `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on- debian-9-en`
 
-2. Com o docker instalado, para instalar o mongo é super simples, é só digitar no terminal `sudo docker pull mongo`. E tá instalado o mongo na sua maquina. 
+2. With docker installed, installing mongo is super simple, just type `sudo docker pull mongo` in the terminal. And mongo is installed on your machine.
 
-3. Agora é preciso fazer ele rodar né, que é mais simples ainda `sudo docker start mongo`. ele por padrão ja vai estar rodando  na porta "27017" containerizado.
+3. Now we need to make it run, which is even simpler `sudo docker start mongo`. by default it will already be running on port "27017" containerized.
 
-Agora sim, tem front, back, mobile, tudo rodando, é só aproveitar o APP.
+Now yes, it has front, back, mobile, everything running, just enjoy the APP.
