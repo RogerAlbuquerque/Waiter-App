@@ -38,7 +38,11 @@ Project of an app to help in restaurants, divided into a mobile app that stays w
 
 4. Inside the mobile project folder, do the same thing in the "utils" folder, changing the ip to your machine's local ip.
 
-5. And finally, you must have Expo Go on your cell phone to read the QRcode that will be generated when running the mobile on your PC.
+5. Now, you need to change API link in some files "app/utils/api.ts", "app/.env", "fe/ utils/api.ts", and put the link that you need to configure to run your backend in API folder, in index file.
+
+6. You need to change the link to connect to mongoDB inside the API folder in idenx file, and put the link of your mongoDB server. 
+
+7. And finally, you must have Expo Go on your cell phone to read the QRcode that will be generated when running the mobile on your PC.
 
 After that, your project is ready to be started, now you just need to start all of them, backend, frontend, mobile and the mongo database (if you run it in a docker container as well).
 To start them are the following commands:
