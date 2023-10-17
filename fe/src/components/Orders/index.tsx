@@ -58,7 +58,10 @@ export function Orders(){
     <>
       <Container>
         {waiting.length <= 0 ?
-          <h2>Loading orders ...</h2>
+          <div style={{display:'flex', flexDirection:'column'}}>
+            <h2>Loading orders ...</h2>
+            <p>Wait a moment</p>
+          </div>
           :
           <>
             <OrdersBoard
