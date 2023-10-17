@@ -57,29 +57,34 @@ export function Orders(){
   return(
     <>
       <Container>
+        {waiting.length <= 0 ?
+          <h2>Loading orders ...</h2>
+          :
+          <>
+            <OrdersBoard
+              icon={Relogio}
+              title="Fila de espera"
+              orders={waiting}
+              onCancelOrder={handleCancelOrder}
+              onChangeOrderStatus={handleOrderStatuschange}
 
-        <OrdersBoard
-          icon={Relogio}
-          title="Fila de espera"
-          orders={waiting}
-          onCancelOrder={handleCancelOrder}
-          onChangeOrderStatus={handleOrderStatuschange}
-
-        />
-        <OrdersBoard
-          icon={Cozinheiro}
-          title="Em preparação"
-          orders={inProduction}
-          onCancelOrder={handleCancelOrder}
-          onChangeOrderStatus={handleOrderStatuschange}
-        />
-        <OrdersBoard
-          icon={Check}
-          title="Pronto"
-          orders={done}
-          onCancelOrder={handleCancelOrder}
-          onChangeOrderStatus={handleOrderStatuschange}
-        />
+            />
+            <OrdersBoard
+              icon={Cozinheiro}
+              title="Em preparação"
+              orders={inProduction}
+              onCancelOrder={handleCancelOrder}
+              onChangeOrderStatus={handleOrderStatuschange}
+            />
+            <OrdersBoard
+              icon={Check}
+              title="Pronto"
+              orders={done}
+              onCancelOrder={handleCancelOrder}
+              onChangeOrderStatus={handleOrderStatuschange}
+            />
+          </>
+        }
       </Container>
     </>
   );
