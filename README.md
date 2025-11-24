@@ -1,4 +1,8 @@
 # Fullstack study project
+
+Frontend link application:
+https://waiter-j5gp93xca-rogeralbuquerque.vercel.app
+---
 Project of an app to help in restaurants, divided into a mobile app that stays with the waiter in which he goes to each table and takes the orders of each customer and sends the order through the backend to the frontend app that is in the kitchen. There they look at the orders and which tables each order is for and it just changes the status if the order is being prepared, if it is on hold, or it has been completed.
 
 ### Link to the web application:
