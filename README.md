@@ -1,75 +1,253 @@
-# Fullstack study project
+# Waiter App
 
-Frontend link application: </br>
-https://waiter-j5gp93xca-rogeralbuquerque.vercel.app
+## Overview
+
+Waiter App is a fullstack project that connects three application layers in a single repository:
+
+- `api`: backend in Node.js/Express with MongoDB and WebSocket
+- `fe`: web application in React for the kitchen team
+- `app`: mobile application in React Native / Expo for waiter use
+
+The main goal is to provide a restaurant service flow: the waiter registers orders in the mobile app, the backend stores and distributes those orders, and the kitchen monitors and updates order statuses in real time.
+
+## System architecture
+
+### General structure
+
+- `api/`: REST + WebSocket service responsible for managing categories, products and orders
+- `fe/`: web dashboard to view orders by status and control the production flow
+- `app/`: mobile app to create orders from available categories and products
+
+### Data flow
+
+1. The `app` queries categories and products from the backend.
+2. The waiter selects a table, products, and confirms the order.
+3. The backend stores the order in MongoDB and emits an event via `socket.io`.
+4. The `fe` receives the event in real time and updates the orders dashboard.
+5. The kitchen team changes the order status in `fe` or cancels it, and the backend persists that change.
+
+## Backend (`api`)
+
+### Main responsibilities
+
+- Connect to MongoDB using `mongoose`
+- Expose REST routes for categories, products, and orders
+- Receive image uploads for products with `multer`
+- Serve static image files through `/uploads`
+- Emit real-time events with `socket.io`
+
+### Important endpoints
+
+- `GET /categories` — lists all categories
+- `POST /categories` — creates a new category
+- `GET /products` — lists all products
+- `POST /products` — creates a product with image upload
+- `DELETE /products/:productId` — removes a product
+- `GET /categories/:categoryId/products` — lists products by category
+- `GET /orders` — lists all orders
+- `POST /orders` — creates a new order
+- `PATCH /orders/:orderId` — updates the order status
+- `DELETE /orders/:orderId` — cancels an order
+
+### Domain models
+
+- `Category`: name and icon
+- `Product`: name, description, image, price, ingredients and category reference
+- `Order`: table, status, creation date and list of products with quantities
+
+### Technical notes
+
+- The MongoDB connection is defined by `process.env.MONGODB_URI`.
+
 ---
-Project of an app to help in restaurants, divided into a mobile app that stays with the waiter in which he goes to each table and takes the orders of each customer and sends the order through the backend to the frontend app that is in the kitchen. There they look at the orders and which tables each order is for and it just changes the status if the order is being prepared, if it is on hold, or it has been completed.
 
-### Link to the web application:
-`https://waiter-app-virid.vercel.app/`
+## Web app (`fe`)
 
-# Technologies used
-* Typescript was used on everything, front, back and mobile.
-* EsLint also to make the whole code more standardized and organized.
+### Purpose
 
-### BACKEND:
-* Express
-* The database was mongo only with docker
-* Mongoose to do the interactions between back and mongo
-* Multer was also used to be able to receive images in requests for the backend
+Administrative dashboard for the kitchen to monitor and manage orders.
 
+### Core behavior
 
-### FRONTEND:
-* React
-* Axios to make requests to the backend
-* Styled-components to make the styles.
-* toastify to create those little text boxes when you finish something
+- Queries orders via API and keeps a local orders list
+- Connects to the backend through WebSocket to receive new orders in real time
+- Displays orders grouped by status: `WAITING`, `IN_PRODUCTION`, `DONE`
+- Allows opening the order modal, changing status, and canceling orders
+- Updates the local UI state without reloading the page
 
-### MOBILE:
-* React-Native
-* Expo to facilitate some implementations
-* Axios was also used here
-* Styled-Component
-* toastify
+### Important notes
 
+- The frontend uses `import.meta.env.VITE_API_URI` to configure the API endpoint.
+- In `OrderModal`, there is a hardcoded image URL: `https://waiterapp-api.onrender.com/uploads/...`, which may cause environment inconsistencies.
+- The application uses `react-toastify` for visual feedback on completed actions.
 
-# How to start the project on your machine:
-1. First go to each project folder, open the terminal there and issue the `yarn` command to install all dependencies or you can use `npm install`.
+---
 
-2. After everything is installed, Mongo must be installed on the machine, or running in a docker container on port "27017" (This port can be changed in the "index" file inside the API folder).
+## Mobile app (`app`)
 
-3. Now in the frontend (the "fe" folder) you need to go inside the "utils" folder and change the ip inside it to the local ip of your machine. This is the base ip that axios is using to make requests.
+### Purpose
 
-4. Inside the mobile project folder, do the same thing in the "utils" folder, changing the ip to your machine's local ip.
+Application for the waiter to create orders and send them to the backend.
 
-5. Now, you need to change API link in some files "app/utils/api.ts", "app/.env", "fe/ utils/api.ts", and put the link that you need to configure to run your backend in API folder, in index file.
+### Core behavior
 
-6. You need to change the link to connect to mongoDB inside the API folder in idenx file, and put the link of your mongoDB server. 
+- Loads categories and products in parallel on startup
+- Filters products by selected category
+- Allows selecting a table and building a cart of items
+- Displays the order total and item quantities
+- Sends the order to the backend via `POST /orders`
+- Shows a confirmation modal after submission
 
-7. And finally, you must have Expo Go on your cell phone to read the QRcode that will be generated when running the mobile on your PC.
+### Important notes
 
-After that, your project is ready to be started, now you just need to start all of them, backend, frontend, mobile and the mongo database (if you run it in a docker container as well).
-To start them are the following commands:
+- The mobile app uses `process.env.URI_API` to configure the API base URL.
+- Product images are loaded via a URL based on the returned `imagePath` field.
 
-~~~
+## Technologies used
 
-/* Backend */
-yarn start
+### Backend
 
-/* Front End */
+- Node.js
+- Express
+- TypeScript
+- Mongoose
+- MongoDB
+- Multer
+- Socket.io
+- dotenv
+- nodemon
+
+### Web frontend
+
+- React
+- TypeScript
+- Vite
+- Axios
+- Styled-components
+- react-toastify
+- socket.io-client
+
+### Mobile
+
+- React Native
+- Expo
+- Axios
+- Styled-components
+- Expo Font
+
+## Directory organization
+
+- `api/`
+  
+  - `src/index.ts`: entry point, initializes Express, MongoDB and Socket.io
+  - `src/router.ts`: defines routes and upload middleware
+  - `src/app/models`: data models
+  - `src/app/useCases`: domain CRUD logic
+  - `uploads/`: folder for images uploaded via API
+
+- `fe/`
+  
+  - `src/App.tsx`: entry point of the web UI
+  - `src/components`: UI components and orders dashboard
+  - `src/utils/api.ts`: configured Axios client
+  - `src/types`: TypeScript types
+
+- `app/`
+  
+  - `App.tsx`: Expo entry point
+  - `src/Main`: main waiter screen
+  - `src/components`: mobile interface components
+  - `src/utils/api.ts`: mobile Axios client
+  - `src/types`: mobile data types
+
+## Installation and execution
+
+### Prerequisites
+
+- Node.js
+- Yarn or npm
+- MongoDB running locally or with Docker
+- Expo CLI for the mobile application
+
+### Backend
+
+```bash
+cd api
+yarn install
+# or npm install
+```
+
+Configure environment variable:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/waiterapp
+```
+
+Start:
+
+```bash
 yarn dev
+# or npm run dev
+```
 
-/* Mobile */
+### Web frontend
+
+```bash
+cd fe
+yarn install
+# or npm install
+```
+
+Configure environment variable in `fe/.env` or equivalent:
+
+```env
+VITE_API_URI=http://localhost:3001
+```
+
+Start:
+
+```bash
+yarn dev
+# or npm run dev
+```
+
+### Mobile
+
+```bash
+cd app
+yarn install
+# or npm install
+```
+
+Configure environment variable in `app/.env` or Expo environment file:
+
+```env
+URI_API=http://localhost:3001
+```
+
+Start:
+
+```bash
 yarn start
+# or npm run start
+```
 
-~~~
+## Usage examples
 
+- The waiter opens the mobile app, chooses a table, adds items to the cart, and confirms the order.
+- The kitchen views the order on the web dashboard in `Waiting queue`.
+- When starting production, the kitchen changes the order to `In preparation`.
+- When the order is ready, the kitchen changes it to `Done` or cancels the order.
 
-# Installing mongo in a docker container on your machine
-1. First you need to have docker installed on your machine, I installed it on my linux through this site `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on- debian-9-en`
+## Possible future improvements
 
-2. With docker installed, installing mongo is super simple, just type `sudo docker pull mongo` in the terminal. And mongo is installed on your machine.
+- Centralize environment variables and remove hardcoded URLs from the frontend.
+- Add authentication to separate waiter and kitchen credentials.
+- Implement more robust error handling in API calls.
+- Add OpenAPI/Swagger documentation for the backend.
+- Use cloud file storage instead of the local `uploads` folder.
+- Standardize how clients consume the API to ensure environment compatibility.
 
-3. Now we need to make it run, which is even simpler `sudo docker start mongo`. by default it will already be running on port "27017" containerized.
+## Final notes
 
-Now yes, it has front, back, mobile, everything running, just enjoy the APP.
+This is an MVP of a restaurant order system, focused on waiter and kitchen integration. The architecture is simple and modular, allowing the backend, web dashboard, and mobile app to evolve independently.
